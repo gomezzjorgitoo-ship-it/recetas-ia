@@ -1,0 +1,15 @@
+name: Fabricar App Android
+on: [push, workflow_dispatch]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+      - run: |
+          mkdir lib
+          mv main.dart lib/main.dart
+          flutter build apk --split-per-abi
+          
